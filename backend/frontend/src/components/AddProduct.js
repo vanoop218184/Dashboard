@@ -16,7 +16,7 @@ const AddProduct = () => {
         return false;
       }
         let userId=JSON.parse(localStorage.getItem('user'))._id;
-        let res=await fetch("http://localhost:8000/addproduct",{
+        let res=await fetch(`${window.location.origin}/addproduct`,{
             method:'post',
             body:JSON.stringify({name,price,category,userId,company}),
             headers:{

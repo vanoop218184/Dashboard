@@ -1,8 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const Jwt=require('jsonwebtoken');
-const jwtKey='e-comm';
+const path =require('path')
 
 require("./db/config");
 const User = require("./db/User.js");
@@ -16,19 +15,18 @@ app.post("/register", async (req, res) => {
   delete result.password;
   res.send(result);
 });
+
+app.get("/",(req,res)=>{
+  app.use(express.static(path.resolve(__dirname,"frontend","build")));
+  res.sendFile(path.resolve(__dirname,"frontend","build","index.html"));
+});
 app.post("/login", async (req, res) => {
   if (req.body.password && req.body.email) {
     let user = await User.findOne(req.body).select("-password");
     if (user) {
-      Jwt.sign({user},jwtKey,{expiresIn:"2h"},(err,token)=>{
-        if(err){
-          res.send({result:"something went wrong ,try after some time"});
-        }
-        res.send(user,{auth:token});
-      })
-      
-    } 
-  } 
+        res.send(user);
+      } 
+    }  
 });
 app.post("/addproduct",async(req,res)=>{
   let product=new Product(req.body);

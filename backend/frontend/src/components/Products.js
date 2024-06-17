@@ -8,12 +8,12 @@ const Products = () => {
     getProducts();
   }, []);
   const getProducts = async () => {
-    let res = await fetch("http://localhost:8000/products");
+    let res = await fetch(`${window.location.origin}/products`);
     res = await res.json();
     setProduct(res);
   };
   const delProduct= async(e)=>{
-   let result = await fetch(`http://localhost:8000/product/${e}`,{
+   let result = await fetch(`${window.location.origin}/product/${e}`,{
     method:"Delete"
    });
    result= await result.json();
@@ -26,7 +26,7 @@ const Products = () => {
     let key=event.target.value;
     if(key)
     {
-        let result=await fetch(`http://localhost:8000/search/${key}`)
+        let result=await fetch(`${window.location.origin}/search/${key}`)
         result=await result.json();
         if(result)
         {

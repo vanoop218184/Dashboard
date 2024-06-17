@@ -12,7 +12,7 @@ const SignUp = () => {
     }
   });
   const collectData = async () => {
-    let result = await fetch("http://localhost:8000/register", {
+    let result = await fetch(`${window.location.origin}/register`, {
       method: "post",
       body: JSON.stringify({ name, email, password }),
       headers: {

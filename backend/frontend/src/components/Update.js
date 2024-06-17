@@ -13,7 +13,7 @@ const Update= () => {
      },[]);
     const getProductDetails= async()=>{
         console.log(params);
-        let result= await fetch(`http://localhost:8000/product/${params.id}`);
+        let result= await fetch(`${window.location.origin}/product/${params.id}`);
          result=await  result.json();
          console.warn(result);
          setName(result.name)
@@ -24,7 +24,7 @@ const Update= () => {
  
    
     const updateProduct=async()=>{
-        let result= await fetch(`http://localhost:8000/product/${params.id}`,{
+        let result= await fetch(`${window.location.origin}/product/${params.id}`,{
             method:'Put',
             body:JSON.stringify({name,price,category,company}),
             headers:{

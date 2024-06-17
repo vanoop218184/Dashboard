@@ -5,7 +5,7 @@ const Login = () => {
   const [password, SetPassword] = useState("");
   const naviagte = useNavigate();
   const handleLogin = async() => {
-    let data = await fetch("http://localhost:8000/login", {
+    let data = await fetch(`${window.location.origin}/login`, {
       method: "post",
       body: JSON.stringify({ email, password }),
       headers: {
